@@ -32,6 +32,20 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    const spotCollection = client.db('spotsDB').collection('spots')
+
+    app.get('/spots', async(req, res) => {
+      const cursor = spotCollection.find()
+      const result = await cursor.toArray()
+      res.send(result)
+    })
+
+    app.post('/spots', async(req, res) => {
+      const newSpots = req.body;
+      console.log(newSpots)
+      const result = await spotCollection.insertOne(newSpots)
+      res.send(result)
+    })
 
 
     // Send a ping to confirm a successful connection

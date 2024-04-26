@@ -52,10 +52,10 @@ async function run() {
       res.send(result)
     })
 
-    app.get('spots/:email', async(req, res) => {
+    app.get('/mySpots/:email', async(req, res) => {
       const email = req.params.email;
       const query = {email: email}
-      const result = await spotCollection.find(query).toArray()
+      const result = await spotCollection.find(query).toArray();
       res.send(result)
     })
 

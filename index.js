@@ -34,6 +34,11 @@ async function run() {
 
     const spotCollection = client.db('spotsDB').collection('spots')
 
+    app.get('/spot', async(req, res) => {
+      const cursor = spotCollection.find().limit(6)
+      const result = await cursor.toArray()
+      res.send(result)
+    })
     app.get('/spots', async(req, res) => {
       const cursor = spotCollection.find()
       const result = await cursor.toArray()

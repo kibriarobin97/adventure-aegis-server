@@ -102,6 +102,13 @@ async function run() {
       res.send(result)
     })
 
+    app.get('/countrySpots/:country', async(req, res) => {
+      const country = req.params.country;
+      const query = {country: country}
+      const result = await spotCollection.find(query).toArray();
+      res.send(result)
+    })
+
 
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });

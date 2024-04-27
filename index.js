@@ -33,6 +33,7 @@ async function run() {
     // await client.connect();
 
     const spotCollection = client.db('spotsDB').collection('spots')
+    const countriesCollection = client.db('spotsDB').collection('countries')
 
     app.get('/spot', async(req, res) => {
       const cursor = spotCollection.find().limit(6)
@@ -92,6 +93,12 @@ async function run() {
       const id = req.params.id;
       const query = {_id: new ObjectId(id)}
       const result = await spotCollection.deleteOne(query)
+      res.send(result)
+    })
+
+    app.get('/countries', async(req, res) => {
+      const cursor = countriesCollection.find()
+      const result = await cursor.toArray()
       res.send(result)
     })
 
